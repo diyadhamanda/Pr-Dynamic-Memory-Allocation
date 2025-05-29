@@ -53,21 +53,44 @@ public:
         }
     }
 
-    void DeleteNode(int index)
+    void DeleteNode(int value)
     {
-        if (index >= 0 && index < size)
+        if (head == NULL)
         {
-            Node *ptr = head;
-
-            for (int i = 0; i < index; i++)
-            {
-                ptr = ptr->next;
-            }
-            cout << "Value at index " << index << " is: " << ptr->data << endl;
-
-            ptr->next = ptr->next->next;
-            this->size--;
+           cout<<"List is Empty ";
+           return;
         }
+        if (head->data == value)
+        {
+            Node *ptr = this->head;
+            this->head = head->next;
+            delete ptr;
+
+            cout<<"Delete Node with Value ["<<value<<"] delete";
+            return;
+        }
+
+        Node *current = this->head;
+        Node *prev = NULL;
+        
+        while (current != NULL && current->data != value)
+        {
+            prev = current;
+            current = current->next;
+        }
+
+        if (current == NULL)
+        {
+           cout<<"Delete Node with Value ["<<value<<"] delete";
+           delete current;
+        }
+
+        prev->next = current->next;
+        delete current;
+
+            cout<<"Delete Node with Value ["<<value<<"] delete";
+            return;
+        
     }
     void reverse()
     {
@@ -138,8 +161,8 @@ int main()
 
         case 3:
             cout << "Enter value for Delete ";
-            cin >> index;
-            list.DeleteNode(index);
+            cin >>element;
+            list.DeleteNode(element);
             break;
 
         case 4:
